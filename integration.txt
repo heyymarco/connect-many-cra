@@ -1,0 +1,35 @@
+1. Copy /src/components  from nextjs directory to /src/components of your cra project
+2. Copy /theme.config.ts from nextjs directory to /src/theme.config.ts
+3. Copy /public/fonts & /public/icons from nextjs directory to /public/fonts & /public/icons
+
+4. add this code into tsconfig.json:
+  "compilerOptions": {
+    "target": "ESNext",
+    ...
+    ...
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+
+5. add these packages into package.json:
+  "dependencies": {
+    "@cssfn/core": "^3.2.0",
+    "@cssfn/cssfn-dom": "^3.2.0",
+    "@cssfn/cssfn-react": "^3.2.0",
+    "@reusable-ui/components": "^6.5.0",
+    "@reusable-ui/core": "^6.5.0",
+    "d3": "^7.8.5"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3"
+  },
+
+6. import these modules into index.tsx at the very_beggining_of_the_file :
+    import '@cssfn/cssfn-dom'
+    import './theme.config'
+
+7. import <FrontalView>, <ConnectManyProvider>, <ConnectManyClient>, etc to youpr App.tsx or any OtherPage.tsx
+
+8. run "npm install"
+9. run "npm run start"
