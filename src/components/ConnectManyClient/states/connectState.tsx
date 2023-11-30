@@ -244,8 +244,8 @@ const ConnectManyProvider = (props: React.PropsWithChildren<ConnectManyProviderP
     // states:
     const [clients          , setClients          ] = useState<ConnectManyClientData[]>([]);
     
-    const [virtualCables    , setVirtualCables    ] = useState<(Connection & { elmA : Element, elmB: Element })[]>([]);
-    const [draftCable       , setDraftCable       ] = useState<(Connection & { elmA : Element, elmB: Element|null, transition: number, lastX: number, lastY: number })|null>(null);
+    const [virtualCables    , setVirtualCables    ] = useState<(Connection & { elmA : Element, elmB: Element     , /*offsetXA: number, offsetYA: number, offsetXB: number, offsetYB: number,*/ })[]>([]);
+    const [draftCable       , setDraftCable       ] = useState<(Connection & { elmA : Element, elmB: Element|null, /*offsetXA: number, offsetYA: number, offsetXB: number, offsetYB: number,*/ transition: number, lastX: number, lastY: number })|null>(null);
     
     const [isDragging       , setIsDragging       ] = useState<string|number|false>(false);
     const [isDroppingAllowed, setIsDroppingAllowed] = useState<boolean>(true);
@@ -363,10 +363,13 @@ const ConnectManyProvider = (props: React.PropsWithChildren<ConnectManyProviderP
             const rectA = elmA.getBoundingClientRect();
             const rectB = elmB?.getBoundingClientRect();
             
-            const headX =         (rectA.left - svgLeft) + (rectA.width  / 2);
-            const headY =         (rectA.top  - svgTop ) + (rectA.height / 2);
-            const tailX = rectB ? (rectB.left - svgLeft) + (rectB.width  / 2) : pointerPositionRef.current.x;
-            const tailY = rectB ? (rectB.top  - svgTop ) + (rectB.height / 2) : pointerPositionRef.current.y;
+            const sideANode = mergedNodes.find((node) => (node.id === sideA));
+            const sideBNode = mergedNodes.find((node) => (node.id === sideB));
+            
+            const headX = (        (rectA.left - svgLeft) + (rectA.width  / 2)                               ) + (sideANode?.offsetX ?? 0);
+            const headY = (        (rectA.top  - svgTop ) + (rectA.height / 2)                               ) + (sideANode?.offsetY ?? 0);
+            const tailX = (rectB ? (rectB.left - svgLeft) + (rectB.width  / 2) : pointerPositionRef.current.x) + (sideBNode?.offsetX ?? 0);
+            const tailY = (rectB ? (rectB.top  - svgTop ) + (rectB.height / 2) : pointerPositionRef.current.y) + (sideBNode?.offsetY ?? 0);
             
             const isDraftCable = 'transition' in cable;
             if (isDraftCable && !!rectB) {
@@ -968,8 +971,8 @@ const ConnectManyProvider = (props: React.PropsWithChildren<ConnectManyProviderP
                                 
                                 // styles:
                                 style     : {
-                                    left : `${selectedCable.headX}px`,
-                                    top  : `${selectedCable.headY}px`,
+                                    left : `${(selectedCable.headX ?? 0) - (sideANode.offsetX ?? 0)}px`,
+                                    top  : `${(selectedCable.headY ?? 0) - (sideANode.offsetX ?? 0)}px`,
                                 },
                             },
                             
@@ -988,8 +991,8 @@ const ConnectManyProvider = (props: React.PropsWithChildren<ConnectManyProviderP
                                 
                                 // styles:
                                 style     : {
-                                    left : `${selectedCable.tailX}px`,
-                                    top  : `${selectedCable.tailY}px`,
+                                    left : `${(selectedCable.tailX ?? 0) - (sideBNode.offsetX ?? 0)}px`,
+                                    top  : `${(selectedCable.tailY ?? 0) - (sideBNode.offsetY ?? 0)}px`,
                                 },
                             },
                             

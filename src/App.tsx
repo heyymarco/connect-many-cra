@@ -82,7 +82,7 @@ function App() {
                             inputs : {
                                 // label : <>Inputs</>,
                                 nodes        : [
-                                    { id: 'inp-a1', label: '1' , limit: 1 },
+                                    { id: 'inp-a1', label: '1' , limit: 1, offsetX: 10, offsetY: 15 },
                                     { id: 'inp-a2', label: '2' , limit: 1 },
                                     { id: 'inp-a3', label: '3' , limit: 1 },
                                     { id: 'inp-a4', label: '4' , limit: 1 },

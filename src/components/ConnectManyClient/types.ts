@@ -27,6 +27,8 @@ export interface ConnectionNode {
     label         ?: React.ReactNode
     limit         ?: number
     enabled       ?: boolean
+    offsetX       ?: number
+    offsetY       ?: number
     nodeComponent ?: React.ReactComponentElement<any, ControlProps<Element>>
 }
 export interface LedNode {
