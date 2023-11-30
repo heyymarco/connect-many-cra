@@ -972,7 +972,7 @@ const ConnectManyProvider = (props: React.PropsWithChildren<ConnectManyProviderP
                                 // styles:
                                 style     : {
                                     left : `${(selectedCable.headX ?? 0) - (sideANode.offsetX ?? 0)}px`,
-                                    top  : `${(selectedCable.headY ?? 0) - (sideANode.offsetX ?? 0)}px`,
+                                    top  : `${(selectedCable.headY ?? 0) - (sideANode.offsetY ?? 0)}px`,
                                 },
                             },
                             
