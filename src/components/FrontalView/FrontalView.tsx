@@ -49,6 +49,27 @@ export const FrontalView = (props: FrontalViewProps) => {
     
     
     const {
+        // refs:
+        elmRef,
+        outerRef,
+        
+        
+        
+        // identifiers:
+        id,
+        
+        
+        
+        // classes:
+        className,
+        
+        
+        
+        // styles:
+        style,
+        
+        
+        
         // components:
         header,
         identifier,
@@ -64,11 +85,36 @@ export const FrontalView = (props: FrontalViewProps) => {
     // jsx:
     return (
         <div
-            className={styleSheet.frontalView}
+            // refs:
+            ref={outerRef as any}
+            
+            
+            
+            // identifiers:
+            id={id}
+            
+            
+            
+            // classes:
+            className={`${styleSheet.frontalView} ${className}`}
+            
+            
+            
+            // styles:
+            style={style}
         >
             <Basic
                 // other props:
                 {...restBasicProps}
+                
+                
+                
+                // refs:
+                elmRef={elmRef}
+                
+                
+                
+                // classes:
                 className='wrapper'
             >
                 {!!header && React.cloneElement(header,

@@ -1,7 +1,6 @@
-import './App.css'
+import styles from './App.module.css'
 
 import { default as React, useState } from 'react'
-import styles from './page.module.css'
 import { ConnectManyProvider, ConnectManyClient, Connection, Cable, Connector } from './components/ConnectManyClient'
 import { FrontalView, Header, Identifier, ActionButton } from './components/FrontalView'
 import Color from 'color'
@@ -35,8 +34,8 @@ function App() {
     
     
     return (
-        <main className='main'>
-            <FrontalView theme='danger'
+        <main className={styles.main}>
+            <FrontalView className={styles.theInstrument} theme='danger'
                 header={
                     <Header
                         logo={<img src='/spongebob.svg' alt='spongebob' width={40} height={40} style={{borderRadius: '10rem'}} />}

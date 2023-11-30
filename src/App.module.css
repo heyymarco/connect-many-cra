@@ -1,0 +1,31 @@
+.main {
+    /* layouts: */
+    display         : grid;
+    grid-template   :
+        "... ....... ..." 1fr
+        "... content ..." minmax(min-content, max-content)
+        "... ....... ..." 1fr
+        /
+        1fr minmax(min-content, 1920px) 1fr
+    ;
+    justify-items   : stretch;
+    align-items     : stretch;
+    justify-content : center;
+    align-content   : center;
+    
+    
+    
+    /* spacings: */
+    gap             : 2rem;
+    padding         : 1rem;
+    
+    
+    
+    /* backgrounds: */
+    background      : url('/public/soft-rainbow.svg');
+}
+
+.theInstrument {
+    /* positions: */
+    grid-area       : content;
+}
