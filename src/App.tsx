@@ -1,7 +1,7 @@
 import styles from './App.module.css'
 
 import { default as React, useState } from 'react'
-import { ConnectManyProvider, ConnectManyClient, Connection, Cable, Connector } from './components/ConnectManyClient'
+import { ConnectManyProvider, ConnectManyClient, Connection, Cable, Connector, ConnectionNode } from './components/ConnectManyClient'
 import { FrontalView, Header, Identifier, ActionButton } from './components/FrontalView'
 import Color from 'color'
 
@@ -31,7 +31,21 @@ function App() {
         { sideA: 'inp-c3', sideB: 'out-b4', color: Color('#FEB301') },
     ]);
     
-    
+    const isNodeConnected = (node: ConnectionNode): boolean => {
+        return cables.some((cable) => (cable.sideA === node.id) || (cable.sideB === node.id));
+    }
+    const conditionalNode = (node: ConnectionNode): ConnectionNode => {
+        if (!isNodeConnected(node)) return node; // keeps the original
+        return {
+            // the original:
+            ...node,
+            
+            // the modifications:
+            label : <img src='/spongebob.svg' alt='spongebob' width='100%' height='100%' />,
+            offsetX: 10,
+            offsetY: 15,
+        };
+    };
     
     return (
         <main className={styles.main}>
@@ -82,9 +96,9 @@ function App() {
                             inputs : {
                                 // label : <>Inputs</>,
                                 nodes        : [
-                                    { id: 'inp-a1', label: '1' , limit: 1, offsetX: 10, offsetY: 15 },
-                                    { id: 'inp-a2', label: '2' , limit: 1 },
-                                    { id: 'inp-a3', label: '3' , limit: 1 },
+                                    conditionalNode({ id: 'inp-a1', label: '1' , limit: 1 }),
+                                    conditionalNode({ id: 'inp-a2', label: '2' , limit: 1 }),
+                                    conditionalNode({ id: 'inp-a3', label: '3' , limit: 1 }),
                                     { id: 'inp-a4', label: '4' , limit: 1 },
                                     { id: 'inp-a5', label: '5' , limit: 1 },
                                     { id: 'inp-a6', label: '6' , limit: 1 },
